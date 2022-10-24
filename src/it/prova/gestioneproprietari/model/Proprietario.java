@@ -3,12 +3,32 @@ package it.prova.gestioneproprietari.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "proprietario")
 public class Proprietario {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
+	@Column(name = "nome")
 	private String nome;
+	@Column(name = "cognome")
 	private String cognome;
+	@Column(name = "codicefiscale")
 	private String codiceFiscale;
+	@Column(name = "datadinascita")
 	private Date dataDiNascita;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proprietario")
 	private List<Automobile> automobili;
 
 	public Proprietario() {
@@ -69,6 +89,12 @@ public class Proprietario {
 
 	public void setAutomobili(List<Automobile> automobili) {
 		this.automobili = automobili;
+	}
+
+	@Override
+	public String toString() {
+		return "Proprietario [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", codiceFiscale=" + codiceFiscale
+				+ ", dataDiNascita=" + dataDiNascita + ", automobili=" + automobili + "]";
 	}
 
 }

@@ -1,20 +1,41 @@
 package it.prova.gestioneproprietari.model;
 
-import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "automobile")
 public class Automobile {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
+	@Column(name = "marca")
 	private String marca;
+	@Column(name = "modello")
 	private String modello;
+	@Column(name = "targa")
 	private String targa;
-	private Date annoImmatricolazione;
+	@Column(name = "annoimmatricolazione")
+	private int annoImmatricolazione;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "proprietario_id")
 	private Proprietario proprietario;
 
 	public Automobile() {
 		super();
 	}
 
-	public Automobile(String marca, String modello, String targa, Date annoImmatricolazione) {
+	public Automobile(String marca, String modello, String targa, int annoImmatricolazione) {
 		super();
 		this.marca = marca;
 		this.modello = modello;
@@ -22,7 +43,7 @@ public class Automobile {
 		this.annoImmatricolazione = annoImmatricolazione;
 	}
 
-	public Automobile(String marca, String modello, String targa, Date annoImmatricolazione,
+	public Automobile(String marca, String modello, String targa, int annoImmatricolazione,
 			Proprietario proprietario) {
 		super();
 		this.marca = marca;
@@ -64,11 +85,11 @@ public class Automobile {
 		this.targa = targa;
 	}
 
-	public Date getAnnoImmatricolazione() {
+	public int getAnnoImmatricolazione() {
 		return annoImmatricolazione;
 	}
 
-	public void setAnnoImmatricolazione(Date annoImmatricolazione) {
+	public void setAnnoImmatricolazione(int annoImmatricolazione) {
 		this.annoImmatricolazione = annoImmatricolazione;
 	}
 
@@ -79,5 +100,13 @@ public class Automobile {
 	public void setProprietario(Proprietario proprietario) {
 		this.proprietario = proprietario;
 	}
+
+	@Override
+	public String toString() {
+		return "Automobile [id=" + id + ", marca=" + marca + ", modello=" + modello + ", targa=" + targa
+				+ ", annoImmatricolazione=" + annoImmatricolazione + ", proprietario=" + proprietario + "]";
+	}
+	
+	
 
 }
