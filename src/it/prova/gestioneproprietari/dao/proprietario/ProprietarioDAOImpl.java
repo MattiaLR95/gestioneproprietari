@@ -13,7 +13,7 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 
 	@Override
 	public List<Proprietario> list() throws Exception {
-		return entityManager.createQuery("from proprietario", Proprietario.class).getResultList();
+		return entityManager.createQuery("from Proprietario", Proprietario.class).getResultList();
 	}
 
 	@Override
@@ -51,12 +51,12 @@ public class ProprietarioDAOImpl implements ProprietarioDAO {
 	}
 
 	@Override
-	public int countProprietariConAutoImmatricolateDaUnCertoAnno(int input) throws Exception{
-		if(input<0) {
+	public int countProprietariConAutoImmatricolateDaUnCertoAnno(int input) throws Exception {
+		if (input < 0) {
 			throw new Exception("Attenzione! Valore inserito non valido");
 		}
 		TypedQuery<Integer> query = entityManager.createQuery(
-				"select count (distinct proprietario_id) from automobile where annoimmatricolazione>=?1;",
+				"select count (distinct proprietario_id) from Automobile where annoimmatricolazione >= ?1",
 				Integer.class);
 		query.setParameter(1, input);
 		return query.getSingleResult().intValue();

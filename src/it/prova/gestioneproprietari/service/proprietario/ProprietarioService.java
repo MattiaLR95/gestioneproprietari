@@ -6,7 +6,7 @@ import it.prova.gestioneproprietari.dao.proprietario.ProprietarioDAO;
 import it.prova.gestioneproprietari.model.Proprietario;
 
 public interface ProprietarioService {
-	public List<Proprietario> listAllAbitanti() throws Exception;
+	public List<Proprietario> listAllProprietario() throws Exception;
 
 	public Proprietario caricaSingoloAbitante(Long id) throws Exception;
 

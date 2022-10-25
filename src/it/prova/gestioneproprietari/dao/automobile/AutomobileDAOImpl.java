@@ -14,7 +14,7 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 
 	@Override
 	public List<Automobile> list() throws Exception {
-		return entityManager.createQuery("from automobile", Automobile.class).getResultList();
+		return entityManager.createQuery("from Automobile", Automobile.class).getResultList();
 	}
 
 	@Override
@@ -54,14 +54,15 @@ public class AutomobileDAOImpl implements AutomobileDAO {
 	@Override
 	public List<Automobile> proprietariConCodiceFiscaleThatStartsWith(String iniziale) throws Exception {
 		TypedQuery<Automobile> query = entityManager.createQuery(
-				"from automobile a left join fetch a.proprietario where codicefiscale like ?1;", Automobile.class);
+				"select a from Proprietario p inner join p.automobili a where p.codiceFiscale like ?1",
+				Automobile.class);
 		return query.setParameter(1, iniziale + "%").getResultList();
 	}
 
 	@Override
-	public List<Automobile> proprietariMinorenni(Date input) {
+	public List<Automobile> proprietariMinorenni() {
 		TypedQuery<Automobile> query = entityManager.createQuery(
-				"from automobile a left join fetch proprietario p where a.proprietario.eta<18", Automobile.class);
+				"select a from Proprietario p inner join p.automobili a where year(CURRENT_DATE)-year(p.dataDiNascita) < 18", Automobile.class);
 		return query.getResultList();
 	}
 

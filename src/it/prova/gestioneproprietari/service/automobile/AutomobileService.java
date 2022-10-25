@@ -20,7 +20,7 @@ public interface AutomobileService {
 
 	public List<Automobile> proprietariConCodiceFiscaleCheInizianoCon(String iniziale) throws Exception;
 	
-	public List<Automobile> proprietariMinorenni(Date input) throws Exception;
+	public List<Automobile> proprietariMinorenni() throws Exception;
 	
 	public void setAutomobileDAO(AutomobileDAO automobileDAO);
 }
